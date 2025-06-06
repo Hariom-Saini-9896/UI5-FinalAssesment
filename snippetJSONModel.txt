@@ -1,0 +1,49 @@
+1. JSON Structure
+
+{
+  "employee": {
+    "name": "Hariom Saini",
+    "role": "Developer"
+  }
+}
+
+
+
+2. Main.view.xml
+
+<mvc:View
+  controllerName="myapp.controller.Main"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  
+  <VBox class="sapUiSmallMargin">
+    <Text text="{/employee/name}" />
+    <Text text="{/employee/role}" />
+  </VBox>
+</mvc:View>
+
+
+
+3. Main.controller.js
+
+sap.ui.define([
+  "sap/ui/core/mvc/Controller",
+  "sap/ui/model/json/JSONModel"
+], function(Controller, JSONModel) {
+  "use strict";
+
+  return Controller.extend("myapp.controller.Main", {
+    onInit: function() {
+      // Create a JSONModel instance
+      var oModel = new JSONModel();
+
+      // Load data from JSON file
+      oModel.loadData("model/data.json");
+
+      // Set the model to the current view
+      this.getView().setModel(oModel);
+    }
+  });
+});
+
+
